@@ -9,7 +9,7 @@ VarSpeedServo servo3;
 
 
 void setup() {
-  // *나중에 여기 설정 코드 입력*
+  // *나중에 여기 설정 코드 입력*(로봇 테스트)
   
 servo1.attach(3);  // 아두이노에 Servo가 어떤 핀에 연결되었는지 확인
 servo2.attach(5);
@@ -19,7 +19,7 @@ Serial.begin(9600);
 
 
 void loop() {
-  // *메인 코드를 여기 적으면 반복 실행*
+  // *메인 코드를 여기 적으면 반복 실행*(로봇 테스트)
 
 
   if (Serial.available()){
