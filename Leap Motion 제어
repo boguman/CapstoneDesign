@@ -1,0 +1,108 @@
+import de.voidplus.leapmotion.*; //call the leap motion library
+import processing.serial.*;  // call the serial library to use serial communicator
+
+String num; // variable to store output to send to arduino
+
+String LeapX;
+String LeapY;
+String LeapZ;
+
+int LX;
+int LY;
+int LZ;
+
+LeapMotion leap;
+Serial myPort;
+
+void setup() {
+  size(800, 500, OPENGL);
+  leap = new LeapMotion(this);
+  String portName = Serial.list()[0];
+  myPort = new Serial (this,portName, 9600);
+}
+
+void draw() {
+  background(255);
+  for (Hand hand : leap.getHands ()) {
+    PVector indexTip = hand.getIndexFinger().getRawPositionOfJointTip();
+
+    text("x: " + nf(indexTip.x, 0, 1), 20, 40);
+    text("y: " + nf(indexTip.y, 0, 1), 20, 60);
+    text("z: " + nf(indexTip.z, 0, 1), 20, 80);
+    
+    LeapX = nf(indexTip.x, 0, 1); //location of fingertips in strings
+    LeapY = nf(indexTip.y, 0, 1);
+    LeapZ = nf(indexTip.z, 0, 1);
+    
+    
+    LX = int(LeapX); //changes locations of fingertips to int variables
+    LY = int(LeapY);
+    LZ = int(LeapZ);
+    
+    
+    
+    if (LX>0) {    // check if hand is more than 0 on x-axis
+      
+        if (LZ>-100) { // check if hand is more than -100 on z axis
+          
+          if (LY< 265) { // check if hand is less than 265 on z axis
+          num = "1";    // set num to 1, which is going to be position 1 on arduino
+          println("1");
+          }
+          
+              else { 
+                  num = "5";
+                  println("5");
+              }
+        } else {
+          
+          if(LY<265) {
+          num ="2";
+          println("2");
+          }
+          
+          else {
+          num="6";
+          println("6");
+          }
+        }
+      
+      
+    } else {
+             if (LZ>-100) {
+               if(LY<256) {
+            num = "3";
+          println("3");
+               }
+               else{
+                num = "7";
+                println("7");
+               }
+               
+        } else {
+          if (LY<265){
+          num ="4";
+          println("4");
+          }
+          else  {
+           num="8";
+           println("8");
+          }
+        }
+      
+    }
+    
+   
+      
+    myPort.write(num);  
+    
+    println("X:");
+    println(LX);
+    println("Y:");
+    println(LY);
+    println("Z:");
+    println(LZ);
+
+   
+  }
+}
