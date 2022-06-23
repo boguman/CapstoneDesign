@@ -1,0 +1,93 @@
+#include <VarSpeedServo.h> //VarSpeedServo library is used because it gradually moves the servo instead of snapping to position
+
+char val;  //Variable to store input from Serial communicator which is coming from the Processing environment(Where Leap is running)
+
+
+VarSpeedServo servo1; //declare Servos
+VarSpeedServo servo2;
+VarSpeedServo servo3;
+
+
+void setup() {
+  // put your setup code here, to run once:
+  
+servo1.attach(3);  // tell Arduino which pins the servos are attached to.
+servo2.attach(5);
+servo3.attach(10);
+Serial.begin(9600);
+}
+
+
+void loop() {
+  // put your main code here, to run repeatedly:
+
+
+  if (Serial.available()){
+    val = Serial.read ();
+  }
+
+      //8 positions saved according to the input from Serial Communicator
+      
+      if (val == '1'){
+      servo1.write(130,50); //moves servo1 to 130 degrees with a speed of 50
+      servo2.write(30,50);
+      servo3.write(160,50);
+    
+      Serial.println(1);
+  }
+
+      if (val == '2'){
+      servo1.write(30,50);
+      servo2.write(150,50);
+      servo3.write(30,50);
+    
+      Serial.println(2);
+      }
+
+      if (val == '3'){
+      servo1.write(30,50);
+      servo2.write(30,50);
+      servo3.write(160,50);
+      Serial.println(2);
+      }
+
+      if (val == '4'){
+      servo1.write(130,50);
+      servo2.write(150.50);
+      servo3.write(30,50);
+  
+      Serial.println(2);
+      }
+
+      if (val == '5'){
+      servo1.write(130,50);
+      servo2.write(60,50);
+      servo3.write(60,50);
+    
+      Serial.println(1);
+      }
+
+      if (val == '6'){
+      servo1.write(30,50);
+      servo2.write(120,50);
+      servo3.write(120,50);
+    
+      Serial.println(2);
+      }
+
+      if (val == '7'){
+      servo1.write(30,50);
+      servo2.write(60,50);
+      servo3.write(60,50);
+      Serial.println(2);
+      }
+
+      if (val == '8'){
+      servo1.write(130,50);
+      servo2.write(120.50);
+      servo3.write(120,50);
+  
+      Serial.println(2);
+      } 
+
+}
