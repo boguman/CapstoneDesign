@@ -1,7 +1,7 @@
-import de.voidplus.leapmotion.*; //call the leap motion library
-import processing.serial.*;  // call the serial library to use serial communicator
+import de.voidplus.leapmotion.*; //leap motion 라이브러리 호출
+import processing.serial.*;  // 시리얼 통신을 위한 시리얼 라이브러리 호출
 
-String num; // variable to store output to send to arduino
+String num; // 아두이노로 전송할 변수
 
 String LeapX;
 String LeapY;
@@ -41,12 +41,12 @@ void draw() {
     
     
     
-    if (LX>0) {    // check if hand is more than 0 on x-axis
+    if (LX>0) {    // 로봇 손 X축 값이 0초과인지 확인
       
-        if (LZ>-100) { // check if hand is more than -100 on z axis
+        if (LZ>-100) { // 로봇 손 Z축 값이 -100초과인지 확인
           
-          if (LY< 265) { // check if hand is less than 265 on z axis
-          num = "1";    // set num to 1, which is going to be position 1 on arduino
+          if (LY< 265) { // 로봇 손 Z축 값이 265 미만인지 확인
+          num = "1";    // 아두이노 1번 위치로 
           println("1");
           }
           
